@@ -8,7 +8,7 @@ export default function Home() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <h1>LOGIN</h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+        <div className="flex gap-3 items-center flex-col sm:flex-row">
         
           <p>Username</p>
 
