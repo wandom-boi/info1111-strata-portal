@@ -97,6 +97,14 @@ export default function Home() {
         <main className="max-w-6xl mx-auto">
           <h1 className="text-4xl font-bold text-center mb-12">Welcome to The Strata Estate</h1>
           
+          {/* Region Information */}
+          <div className="mb-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+            <h2 className="text-xl font-semibold mb-2">Server Information</h2>
+            <div id="region-info" className="text-gray-600 dark:text-gray-400">
+              Loading region information...
+            </div>
+          </div>
+
           {/* Bulletin Board Section */}
           <div className="mb-16">
             <h2 className="text-3xl font-semibold mb-6">Community Events</h2>
@@ -182,6 +190,24 @@ export default function Home() {
           </div>
         </main>
       </div>
+
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          fetch('/api/region')
+            .then(response => response.json())
+            .then(data => {
+              document.getElementById('region-info').innerHTML = 
+                \`<p>Region: \${data.region}</p>
+                 <p>Message: \${data.message}</p>
+                 <p>Environment: \${data.environment}</p>
+                 <p>Last Updated: \${data.timestamp}</p>\`;
+            })
+            .catch(error => {
+              document.getElementById('region-info').innerHTML = 
+                'Error loading region information';
+            });
+        `
+      }} />
     </div>
   );
 }
