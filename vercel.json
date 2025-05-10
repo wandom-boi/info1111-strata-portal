@@ -1,14 +1,37 @@
 {
-  "version": 2,
-  "buildCommand": "next build",
-  "devCommand": "next dev",
-  "installCommand": "npm install",
-  "framework": "nextjs",
-  "outputDirectory": ".next",
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ]
-} 
+    "version": 2,
+    "buildCommand": "next build",
+    "devCommand": "next dev",
+    "installCommand": "npm install",
+    "framework": "nextjs",
+    "outputDirectory": ".next",
+    "regions": ["syd1"],
+    "headers": [
+      {
+        "source": "/(.*)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600"
+          },
+          {
+            "key": "X-Custom-Header",
+            "value": "This is an X-Custom-Header"
+          }
+        ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/old-dashboard",
+        "destination": "/dashboard",
+        "permanent": true
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/$1"
+      }
+    ]
+  }
