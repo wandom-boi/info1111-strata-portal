@@ -1,32 +1,51 @@
+import Image from "next/image";
+
 export default function Home() {
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen p-8 pb-20 font-[family-name:var(--font-geist-sans)]">
-      <img src="/the-strata-portal.png" className="absolute top-5 left-5 w-108 h-16" />
-      <h1 className="text-center mt-8 text-4xl font-bold">LOGIN</h1>
+    <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+      {/* Fixed Navigation Bar */}
+      <div className="fixed top-0 left-0 right-0 bg-background border-b border-black/[.08] dark:border-white/[.145] z-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <Image
+              src="/the-strata-portal.png"
+              alt="Logo"
+              width={200}
+              height={40}
+              className="h-8 w-auto"
+            />
+          </div>
+        </div>
+      </div>
 
-      <div className="flex flex-col items-center gap-4">
-        <label htmlFor="username" className="text-left">Username</label>
-        <input
-          type="text"
-          id="username"
-          className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#7a7a7a] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto md:w-[400px]"
-        />
+      {/* Login Form */}
+      <div className="pt-24 px-8 pb-20">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-4xl font-bold text-center mb-8">LOGIN</h1>
 
-        <label htmlFor="pw" className="text-left">Password</label>
-        <input
-          type="password"
-          id="pw"
-          className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#7a7a7a] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto md:w-[400px]"
-        />
+          <div className="flex flex-col items-center gap-4">
+            <label htmlFor="username" className="text-left">Username</label>
+            <input
+              type="text"
+              id="username"
+              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#7a7a7a] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto md:w-[400px]"
+            />
 
-        <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto md:w-[200px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Login to portal
-          </a>
+            <label htmlFor="pw" className="text-left">Password</label>
+            <input
+              type="password"
+              id="pw"
+              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#7a7a7a] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto md:w-[400px]"
+            />
+
+            <a
+              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto md:w-[200px]"
+              href="/dashboard"
+            >
+              Login to portal
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
