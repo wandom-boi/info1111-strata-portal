@@ -13,11 +13,5 @@
       "env": {
         "NEXT_PUBLIC_APP_ENV": "production"
       }
-    },
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/$1"
-      }
-    ]
+    }
   }
