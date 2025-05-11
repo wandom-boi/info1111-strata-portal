@@ -65,7 +65,7 @@ export default function Home() {
               </a>
               <a
                 className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm px-4 py-2"
-                href="/property"
+                href="/properties"
               >
                 Properties
               </a>

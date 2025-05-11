@@ -1,19 +1,31 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Property() {
-  // Generate apartment data
-  const apartments = Array.from({ length: 17 }, (_, floor) => 
-    Array.from({ length: 10 }, (_, unit) => ({
-      id: `${floor + 1}${String(unit + 1).padStart(2, '0')}`,
-      number: `${floor + 1}${String(unit + 1).padStart(2, '0')}`,
-      floor: floor + 1,
-      unit: unit + 1,
-      status: Math.random() > 0.8 ? 'occupied' : 'available' // Random status for demo
-    }))
-  ).flat();
+  const [apartments, setApartments] = useState<Array<{
+    id: string;
+    number: string;
+    floor: number;
+    unit: number;
+    status: 'occupied' | 'available';
+  }>>([]);
+
+  useEffect(() => {
+    // Generate apartment data on client side
+    const generatedApartments = Array.from({ length: 17 }, (_, floor) => 
+        Array.from({ length: 10 }, (_, unit) => ({
+          id: `${floor + 1}${String(unit + 1).padStart(2, '0')}`,
+          number: `${floor + 1}${String(unit + 1).padStart(2, '0')}`,
+          floor: floor + 1,
+          unit: unit + 1,
+          status: (Math.random() > 0.8 ? 'occupied' : 'available') as 'occupied' | 'available'
+        }))
+      ).flat();
+    
+    setApartments(generatedApartments);
+  }, []);
 
   return (
     <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
@@ -43,7 +55,7 @@ export default function Property() {
               </a>
               <a
                 className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm px-4 py-2"
-                href="/property"
+                href="/properties"
               >
                 Properties
               </a>
