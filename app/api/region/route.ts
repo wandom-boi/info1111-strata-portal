@@ -1,13 +1,15 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
+import { promises as fs } from "fs";
+import path from "path";
 
 export async function GET() {
-  // Get the server's region from Vercel's environment
-  const region = process.env.VERCEL_REGION || 'unknown';
-  
-  return NextResponse.json({
-    region: region,
-    message: `This request was handled by a server in ${region}`,
-    timestamp: new Date().toISOString(),
-    environment: process.env.NEXT_PUBLIC_APP_ENV
-  });
-} 
+  try {
+    const vercelConfigPath = path.join(process.cwd(), "vercel.json");
+    const file = await fs.readFile(vercelConfigPath, "utf-8");
+    const config = JSON.parse(file);
+    const regions = config.regions || [];
+    return NextResponse.json({ regions });
+  } catch (e) {
+    return NextResponse.json({ regions: [] });
+  }
+}

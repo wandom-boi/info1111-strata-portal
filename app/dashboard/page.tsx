@@ -1,14 +1,24 @@
+"use client";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import BuildingStatus from "../components/BuildingStatus";
 
 export default function Home() {
-  // Sample events data - you can replace these with real events
+  const [region, setRegion] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/region")
+      .then(res => res.json())
+      .then(data => setRegion(data.regions?.[0] || "Unknown"));
+  }, []);
+
   const events = [
     {
       id: 1,
       title: "Annual General Meeting",
       date: "2025-07-15",
       description: "Join us for the yearly AGM to discuss building improvements and budget planning.",
-      image: "/events/meeting.jpg", // You'll need to add these images to your public folder
+      image: "/events/meeting.jpg",
       type: "upcoming"
     },
     {
@@ -51,7 +61,7 @@ export default function Home() {
               className="h-8 w-auto ml-2"
             />
             <div className="flex items-center space-x-4">
-            <a
+              <a
                 className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm px-4 py-2"
                 href="/dashboard"
               >
@@ -92,11 +102,45 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Deployment Region Box */}
+      <div className="pt-20 px-8">
+        <div className="max-w-3xl mx-auto mb-8">
+          {region === null ? (
+            <div className="bg-[#232b3a] border border-[#3b4252] rounded-lg p-6 shadow-lg text-white text-center">
+              Loading region...
+            </div>
+          ) : (
+            <div className="bg-[#232b3a] border border-[#3b4252] rounded-lg p-6 shadow-lg text-white">
+              <div className="font-bold text-lg mb-2">Server Information</div>
+              <div>
+                <span className="font-semibold">Region:</span>
+                <span className="ml-2 px-2 py-1 rounded bg-[#2e3440] text-pink-400 font-mono">{region}</span>
+              </div>
+              <div className="mt-2 text-sm text-blue-200">
+                Message: This request was handled by a server in <span className="font-mono">{region}</span>
+              </div>
+              <div className="mt-1 text-sm text-blue-200">
+                Environment: <span className="font-mono">production</span>
+              </div>
+              <div className="mt-1 text-sm text-blue-200">
+                Last Updated: {new Date().toISOString()}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* Main Content */}
       <div className="pt-24 px-8 pb-20">
         <main className="max-w-6xl mx-auto">
           <h1 className="text-4xl font-bold text-center mb-12">Welcome to The Strata Estate</h1>
           
+          {/* Building Status Section */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-semibold mb-6">Building Status</h2>
+            <BuildingStatus />
+          </div>
+
           {/* Bulletin Board Section */}
           <div className="mb-16">
             <h2 className="text-3xl font-semibold mb-6">Community Events</h2>
